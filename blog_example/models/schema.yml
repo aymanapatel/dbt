@@ -1,0 +1,130 @@
+version: 2
+
+sources:
+  - name: raw_data
+    description: Raw seed data from CSV files
+    tables:
+      - name: blog_posts
+        description: Raw blog post data
+        columns:
+          - name: id
+            description: Unique blog post identifier
+          - name: title
+            description: Blog post title
+          - name: slug
+            description: URL-friendly identifier
+          - name: author_id
+            description: Foreign key to authors
+          - name: content
+            description: Blog post content
+          - name: is_published
+            description: Publication status
+          - name: view_count
+            description: Number of views
+
+      - name: authors
+        description: Raw author data
+        columns:
+          - name: id
+            description: Unique author identifier
+          - name: name
+            description: Author name
+          - name: email
+            description: Author email
+          - name: bio
+            description: Author biography
+
+models:
+  - name: stg_blog_posts
+    description: "Staging layer for published blog posts"
+    columns:
+      - name: id
+        description: "Unique blog post identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: title
+        description: "Blog post title"
+        data_tests:
+          - not_null
+      - name: slug
+        description: "URL-friendly identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: author_id
+        description: "Foreign key to authors"
+        data_tests:
+          - not_null
+          - relationships:
+              to: ref('stg_authors')
+              field: id
+      - name: content
+        description: "Blog post content"
+      - name: is_published
+        description: "Publication status"
+      - name: view_count
+        description: "Number of views"
+        data_tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: integer
+
+  - name: stg_authors
+    description: "Staging layer for authors"
+    columns:
+      - name: id
+        description: "Unique author identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: name
+        description: "Author name"
+        data_tests:
+          - not_null
+      - name: email
+        description: "Author email"
+        data_tests:
+          - unique
+          - not_null
+      - name: bio
+        description: "Author biography"
+      - name: created_at
+        description: "Author creation timestamp"
+
+  - name: blog_posts_enhanced
+    description: "Mart table with enriched blog post data including author information"
+    columns:
+      - name: id
+        description: "Unique blog post identifier"
+        data_tests:
+          - unique
+          - not_null
+      - name: title
+        description: "Blog post title"
+        data_tests:
+          - not_null
+      - name: slug
+        description: "URL-friendly identifier"
+        data_tests:
+          - unique
+      - name: content
+        description: "Blog post content"
+      - name: author_name
+        description: "Name of the blog post author"
+      - name: author_email
+        description: "Email of the blog post author"
+      - name: is_published
+        description: "Publication status"
+        data_tests:
+          - accepted_values:
+              values: [true, false]
+      - name: view_count
+        description: "Number of views for the blog post"
+        data_tests:
+          - dbt_utils.recency:
+              datepart: day
+              interval: 30
+      - name: created_at
+        description: "Blog post creation timestamp"
+      - name: updated_at
+        description: "Blog post last update timestamp"

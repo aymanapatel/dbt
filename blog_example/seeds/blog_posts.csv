@@ -1,0 +1,6 @@
+id,title,slug,author_id,content,is_published,view_count
+1,Getting Started with dbt,getting-started-dbt,1,"Learn the basics of dbt and how to set up your first project.",true,150
+2,Advanced SQL Transformations,advanced-sql,1,"Master complex SQL patterns for data transformation.",true,89
+3,dbt Best Practices,dbt-best-practices,2,"Essential tips and tricks for writing maintainable dbt code.",true,234
+4,Debugging dbt Models,debugging-dbt,2,"How to troubleshoot common dbt issues and errors.",false,45
+5,Version Control for Analytics,version-control-analytics,1,"Implementing Git workflows in your analytics projects.",true,167
