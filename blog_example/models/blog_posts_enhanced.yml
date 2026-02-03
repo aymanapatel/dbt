@@ -1,0 +1,31 @@
+version: 2
+
+models:
+  - name: blog_posts_enhanced
+    description: |
+      ## Enhanced Blog Posts Mart
+      
+      This is the main analytics mart table combining blog posts with author information.
+      It provides a single, denormalized view of all blog content with author context.
+      
+      ### Key Features
+      - Combines blog posts with author names and emails
+      - Includes publication status and view counts
+      - Full author context without additional joins
+      - Pre-aggregated for reporting and dashboarding
+      
+      ### Data Quality
+      - Blog post IDs are unique
+      - Publication status is either true or false
+      - All required fields are populated
+      
+      ### Business Logic
+      - Only includes published blog posts
+      - Author information is enriched via left join
+      - View counts represent engagement metrics
+      
+      ### Use Cases
+      - Building blog dashboards
+      - Analyzing author productivity
+      - Tracking blog performance metrics
+      - Creating content calendars

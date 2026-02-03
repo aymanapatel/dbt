@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: stg_blog_posts
+    description: |
+      ## Staging Layer for Blog Posts
+      
+      This model contains published blog posts filtered from the raw blog_posts seed data.
+      It serves as the foundational layer for downstream analytics and reporting.
+      
+      ### Key Features
+      - Only includes published blog posts (is_published = true)
+      - Includes author relationships via author_id
+      - Tracks creation and update timestamps
+      - Provides a clean, business-ready dataset
+      
+      ### Data Quality
+      - All IDs are unique and non-null
+      - All titles and slugs are unique and non-null
+      - Author IDs have referential integrity to stg_authors
+      
+      ### Usage
+      Use this model when you need published blog post data without unpublished drafts.
+      Join with stg_authors for author information.
