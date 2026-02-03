@@ -57,8 +57,9 @@ models:
         data_tests:
           - not_null
           - relationships:
-              to: ref('stg_authors')
-              field: id
+              arguments:
+                to: ref('stg_authors')
+                field: id
       - name: content
         description: "Blog post content"
       - name: is_published
@@ -67,7 +68,12 @@ models:
         description: "Number of views"
         data_tests:
           - dbt_expectations.expect_column_values_to_be_of_type:
-              column_type: integer
+              arguments:
+                column_type: integer
+      - name: created_at
+        description: "Blog post creation timestamp"
+      - name: updated_at
+        description: "Blog post last update timestamp"
 
   - name: stg_authors
     description: "Staging layer for authors"
@@ -117,13 +123,10 @@ models:
         description: "Publication status"
         data_tests:
           - accepted_values:
-              values: [true, false]
+              arguments:
+                values: [true, false]
       - name: view_count
         description: "Number of views for the blog post"
-        data_tests:
-          - dbt_utils.recency:
-              datepart: day
-              interval: 30
       - name: created_at
         description: "Blog post creation timestamp"
       - name: updated_at
