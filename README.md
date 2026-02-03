@@ -1,32 +1,6 @@
-Introduction
 
-My data pipeline is brittle. 
 
-My data is not version controlled.
-
-My data is not testable.
-
-My data does not have documentation.
-
-ETL to ELT
-
-Traditionally, data pipelines consisted of Extract, Transform, Load (ETL). Source data was converted in the "transform" step to meet requirements, then loaded into the warehouse.
-In the mid-2010s, Amazon and others introduced an infrastructure change that shook up the data landscape: the separation of compute and storage. Services like Amazon Redshift and Snowflake made storage cheap and scalable. This enabled flipping TL to LT—**Extract, Load, Transform (ELT)**. Since storage was inexpensive, you could load raw data first, then transform it directly within the warehouse for downstream applications.
-
-New Age Orchestrators
-
-dbt emerged to add software engineering practices to this new ELT paradigm. Version control, logging, and testing were largely missing from the data world. dbt launched this mindset shift in data engineering.
-
-Software Engineering for Data
-
-dbt is a tool that enables data teams to apply software engineering best practices to analytics engineering.
-- Build tool
-  It is the Maven/Gradle (Java), npm (JavaScript), or Cargo (Rust) equivalent for the data world.
-- Doc generation
-- Testing
-- Version control
-
-Running dbt
+## Running dbt
 
 Step 1: Initialize
 
