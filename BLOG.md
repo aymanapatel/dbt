@@ -1,5 +1,32 @@
 
 
+# ETL to ELT
+
+Insert gemini pro here
+
+
+Traditionally, data pipelines consisted of Extract. transform Load.
+
+
+Source data was converted in the "transform" step to the requirements.
+It was then loaded.
+But in mid-2010a, amazon and others came with a infrastructure change that shook up the data landscape. It was able to segregate compute and storage.
+Snowflake, Amazon then came up with flipping TL to LT. Since storage was segregated and cheap, you could load up into storage before transforming it for downstream applications.
+
+## New age orchestrators 
+
+
+
+
+
+
+Dbt then came to add software engineering practices 
+
+Practices such as version control. Logging and testing is something that was missing in the data world. Dbt was used to launch that mindset in the data engineering world.
+
+
+It is the Maven/Gradle(Java) or npm(JavaScript) or cargo(Rust) equivalent of the data world.
+
 # Running 
 
 
